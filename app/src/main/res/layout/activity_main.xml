@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_dark"
     tools:context="com.example.mi.myprogresslayout.MainActivity">
 
     <com.example.mi.myprogresslayout.ProgressLayout
-        android:layout_width="1000px"
-        android:layout_height="800px"
+        android:layout_width="500px"
+        android:layout_height="400px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@android:color/holo_red_dark"
+        android:background="@android:color/darker_gray"
        >
 
     </com.example.mi.myprogresslayout.ProgressLayout>
@@ -25,5 +26,15 @@
         <!--app:layout_constraintLeft_toLeftOf="parent"-->
         <!--app:layout_constraintRight_toRightOf="parent"-->
         <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <com.example.mi.myprogresslayout.ProgressImageView
+        android:layout_width="500px"
+        android:layout_height="400px"
+        android:src="@drawable/babybus_home"
+        android:layout_marginRight="100px"
+        android:layout_marginBottom="100px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
 
 </android.support.constraint.ConstraintLayout>
