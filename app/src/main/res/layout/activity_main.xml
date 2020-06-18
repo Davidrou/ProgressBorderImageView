@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,34 +7,16 @@
     android:background="@android:color/holo_orange_dark"
     tools:context="com.example.mi.myprogresslayout.MainActivity">
 
-    <com.example.mi.myprogresslayout.ProgressLayout
-        android:layout_width="500px"
-        android:layout_height="400px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@android:color/darker_gray"
-       >
-
-    </com.example.mi.myprogresslayout.ProgressLayout>
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Hello World!"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
     <com.example.mi.myprogresslayout.ProgressImageView
-        android:layout_width="500px"
-        android:layout_height="400px"
+        android:id="@+id/my_progress_imageView"
+        android:layout_width="888px"
+        android:layout_height="680px"
+        android:layout_centerInParent="true"
         android:src="@drawable/babybus_home"
-        android:layout_marginRight="100px"
-        android:layout_marginBottom="100px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:border_width="8dp"
+        app:border_color="@android:color/holo_blue_light"
+        app:need_mask="true"
+        app:mask_color="@color/makeColor"
         />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
