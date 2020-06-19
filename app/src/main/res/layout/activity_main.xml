@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_orange_dark"
-    tools:context="com.example.mi.myprogresslayout.MainActivity">
+    tools:context="com.david.progressborderimageview.MainActivity">
 
-    <com.example.mi.myprogresslayout.ProgressImageView
+    <com.david.progressborderimageview.ProgressImageView
         android:layout_marginTop="30dp"
         android:id="@+id/my_progress_imageView"
         android:layout_width="275dp"
@@ -20,7 +20,7 @@
         app:mask_color="@color/makeColor"
         />
 
-    <com.example.mi.myprogresslayout.ProgressImageView
+    <com.david.progressborderimageview.ProgressImageView
         android:layout_marginTop="10dp"
         android:layout_below="@+id/my_progress_imageView"
         android:id="@+id/my_progress_imageView2"
@@ -34,7 +34,7 @@
         app:mask_color="@color/makeColor2"
         />
 
-    <com.example.mi.myprogresslayout.ProgressImageView
+    <com.david.progressborderimageview.ProgressImageView
         android:layout_marginTop="10dp"
         android:layout_below="@+id/my_progress_imageView2"
         android:id="@+id/my_progress_imageView3"
