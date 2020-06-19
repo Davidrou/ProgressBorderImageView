@@ -106,6 +106,10 @@ public class ProgressImageView extends android.support.v7.widget.AppCompatImageV
         mPathMeasure.setPath(mPathOuter, false);
     }
 
+    /**
+     * 设置进度后不会马上绘制当前的进度 需要使用属性动画逐渐绘制 这样效果会比较流畅
+     * @param progress
+     */
     public void setProgress(int progress) {
         mNextSetProgress = progress;
         startChangeProgressAnim();

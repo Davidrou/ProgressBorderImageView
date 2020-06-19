@@ -8,15 +8,43 @@
     tools:context="com.example.mi.myprogresslayout.MainActivity">
 
     <com.example.mi.myprogresslayout.ProgressImageView
+        android:layout_marginTop="30dp"
         android:id="@+id/my_progress_imageView"
-        android:layout_width="888px"
-        android:layout_height="680px"
-        android:layout_centerInParent="true"
-        android:src="@drawable/babybus_home"
+        android:layout_width="275dp"
+        android:layout_height="183dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/images"
         app:border_width="8dp"
         app:border_color="@android:color/holo_blue_light"
         app:need_mask="true"
         app:mask_color="@color/makeColor"
+        />
+
+    <com.example.mi.myprogresslayout.ProgressImageView
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/my_progress_imageView"
+        android:id="@+id/my_progress_imageView2"
+        android:layout_width="275dp"
+        android:layout_height="183dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/images"
+        app:border_width="15dp"
+        app:border_color="@android:color/holo_green_light"
+        app:need_mask="true"
+        app:mask_color="@color/makeColor2"
+        />
+
+    <com.example.mi.myprogresslayout.ProgressImageView
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/my_progress_imageView2"
+        android:id="@+id/my_progress_imageView3"
+        android:layout_width="275dp"
+        android:layout_height="183dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/images"
+        app:border_width="8dp"
+        app:border_color="@android:color/white"
+        app:need_mask="false"
         />
 
 </RelativeLayout>
