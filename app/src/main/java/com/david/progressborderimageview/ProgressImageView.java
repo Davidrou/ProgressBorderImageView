@@ -12,6 +12,10 @@ import android.graphics.PathMeasure;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -33,6 +37,8 @@ public class ProgressImageView extends android.support.v7.widget.AppCompatImageV
     private int mCornerRadius = 30;
     private int mBorderWidth = 20;
     private int mMaskColor = 0x66000000;
+
+    private Bitmap mBlurBitmap ;
 
     public ProgressImageView(Context context) {
 
@@ -68,8 +74,6 @@ public class ProgressImageView extends android.support.v7.widget.AppCompatImageV
         }
         ta.recycle();
 
-        mCornerRadius = 30;
-        setWillNotDraw(false);
         mPaint = new Paint();
         mPaint.setColor(mBorderColor);
         mPaint.setStyle(Paint.Style.STROKE);
@@ -167,6 +171,11 @@ public class ProgressImageView extends android.support.v7.widget.AppCompatImageV
         //2.画imageView 使用相同的Scale和Path 那么边框的内边界会被遮挡 原因是如果按照实际比例去缩放会导致图片圆角和边框圆角之间有空白
         Rect rect = (new Rect(0, 0, mWidth, mHeight));
         canvas.drawBitmap(mFinalBitmap, rect, rect, mPaint);
+        if (mNeedMask) {
+            mPaint.setAlpha((int) ((1 - mCurrentProgress / 100F) * 255));
+            canvas.drawBitmap(mBlurBitmap, rect, rect, mPaint);
+            mPaint.setAlpha(255);
+        }
         canvas.restore();
     }
 
@@ -177,18 +186,20 @@ public class ProgressImageView extends android.support.v7.widget.AppCompatImageV
         int layerID = canvas.saveLayer(0, 0, width, height, mPaint, Canvas.ALL_SAVE_FLAG);
         //1.画ImageView
         super.onDraw(canvas);
-        //2.画遮罩
-        if (mNeedMask) {
-            Paint paint = new Paint();
-            paint.setColor(mMaskColor);
-//            paint.setAlpha(100);
-            canvas.drawRect(new Rect(0, 0, width, height), paint);
-        }
+//        //2.画遮罩
+//        if (mNeedMask) {
+//            Paint paint = new Paint();
+//            paint.setColor(mMaskColor);
+////            paint.setAlpha(100);
+//            canvas.drawRect(new Rect(0, 0, width, height), paint);
+//        }
         //3.设置混合模式为IN 并且画边框
         mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
         canvas.drawBitmap(createSrcBitmap(width, height), 0, 0, mPaint);
         mPaint.setXfermode(null);
         canvas.restoreToCount(layerID);
+
+        mBlurBitmap = blur(getContext(), bitmap);
         return bitmap;
     }
 
@@ -202,4 +213,21 @@ public class ProgressImageView extends android.support.v7.widget.AppCompatImageV
         return bitmap;
     }
 
+
+    public static Bitmap blur(Context context, Bitmap image) {
+        Bitmap inputBitmap = Bitmap.createScaledBitmap(image, image.getWidth(), image.getHeight(), false);
+        Bitmap outputBitmap = Bitmap.createBitmap(inputBitmap);
+        RenderScript rs = RenderScript.create(context);
+        ScriptIntrinsicBlur blurScript = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+
+        Allocation tmpIn = Allocation.createFromBitmap(rs, inputBitmap);
+        Allocation tmpOut = Allocation.createFromBitmap(rs, outputBitmap);
+
+        blurScript.setRadius(25);
+        blurScript.setInput(tmpIn);
+        blurScript.forEach(tmpOut);
+        tmpOut.copyTo(outputBitmap);
+
+        return outputBitmap;
+    }
 }
